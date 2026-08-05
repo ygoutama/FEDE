@@ -595,10 +595,10 @@
                 </div>
             </nav>
             <div class="sidebar-footer">
-                <div class="user-card">
-                    <div class="user-avatar">JD</div>
+                <div class="user-card" onclick="showProfile()" style="cursor:pointer;">
+                    <div class="user-avatar">YG</div>
                     <div class="user-info">
-                        <div class="user-name">James Davidson</div>
+                        <div class="user-name">Yanto Goutama</div>
                         <div class="user-role">Independent Commissioner</div>
                     </div>
                 </div>
@@ -617,11 +617,11 @@
                     <button class="topbar-btn" id="theme-toggle" title="Toggle Dark Mode">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
                     </button>
-                    <button class="topbar-btn" title="Notifications">
+                    <button class="topbar-btn" title="Notifications" onclick="showNotifications()">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                         <span class="notification-dot"></span>
                     </button>
-                    <button class="topbar-btn" title="Profile">
+                    <button class="topbar-btn" title="Profile" onclick="showProfile()">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </button>
                 </div>
@@ -671,7 +671,7 @@
                                     <div class="card-title">Board Alerts</div>
                                     <div class="card-subtitle">Requiring immediate attention</div>
                                 </div>
-                                <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;">View All</button>
+                                <button class="btn btn-ghost" style="font-size:12px;padding:6px 12px;" onclick="navigateTo('case-library')">View All</button>
                             </div>
                             <div class="card-body">
                                 <div class="alert-list">
@@ -2247,6 +2247,32 @@ Tone: Professional, authoritative, precise. Use corporate governance terminology
         document.getElementById('global-search').addEventListener('blur', function() {
             document.querySelectorAll('.page.active .card, .page.active .metric-card, .page.active .case-card').forEach(el => {
                 el.style.opacity = '1';
+            });
+        });
+
+
+
+        // ==================== NOTIFICATIONS & PROFILE ====================
+        function showNotifications() {
+            alert('Notifications panel would open here.\n\nYou have 3 unread notifications:\n• Whistleblower Report: Procurement Irregularity\n• Regulatory Deadline: ESG Disclosure Filing\n• Board Composition Review Required');
+        }
+
+        function showProfile() {
+            alert('Profile Menu\n\nName: Yanto Goutama\nRole: Independent Commissioner\n\nOptions: View Profile, Account Settings, Log Out');
+        }
+
+        // ==================== ENHANCED NAVIGATION ====================
+        // Ensure all nav items work properly
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const pageId = this.dataset.page;
+                    if (pageId) {
+                        navigateTo(pageId);
+                    }
+                });
             });
         });
 
